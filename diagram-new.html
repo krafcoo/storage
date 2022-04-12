@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Vis Network | Basic usage</title>
+
+    <script
+            type="text/javascript"
+            src="vis-network.min.js"
+    ></script>
+
+    <style type="text/css">
+        #mynetwork2 {
+            width: 1000px;
+            height: 600px;
+            border: 1px solid lightgray;
+        }
+    </style>
+    <style type="text/css">
+        #mynetwork {
+            width: 1000px;
+            height: 600px;
+            border: 1px solid lightgray;
+        }
+    </style>
+</head>
+<body>
+<p>Create a simple network with some nodes and edges.</p>
+<div id="mynetwork"></div>
+
+<script type="text/javascript">
+    // create an array with nodes
+    var nodes = new vis.DataSet([
+        { id: 1, label: "ClientService" },
+        { id: 2, label: "UI" },
+        { id: 4, label: "Platform" },
+        { id: 5, label: "FundingService" },
+        { id: 6, label: "CardPayments" },
+        { id: 7, label: "TransfersIAN" },
+        { id: 10, label: "FundingEventQueue" },
+        { id: 11, label: "Gateway" },
+        { id: 12, label: "3ds Bank" },
+    ]);
+
+    // create an array with edges
+    var edges = new vis.DataSet([
+        { from: 2, to: 1, label: ":0" },
+        { from: 1, to: 5, label: ":1 initialize" },
+        { from: 5, to: 6, label: ":2 grants" },
+        { from: 5, to: 11, label: ":3 create payment" },
+        { from: 5, to: 7, label: ":4 create transfer" },
+        { from: 2, to: 12, label: ":5 authorize" },
+        { from: 11, to: 10, label: ":6 notification " },
+        { from: 10, to: 5, label: ":7 fwd notification " },
+        { from: 5, to: 7, label: ":8 notify platform " },
+        { from: 4, to: 5, label: ":9 reserve " },
+        { from: 5, to: 7, label: ":10 start " },
+        { from: 4, to: 5, label: ":11 capture " },
+        { from: 5, to: 7, label: ":12 capture " },
+        { from: 7, to: 11, label: ":13 capture " },
+        { from: 11, to: 10, label: ":14 notification " },
+        { from: 10, to: 7, label: ":15 notification " },
+    ]);
+
+    // create a network
+    var container = document.getElementById("mynetwork");
+    var data = {
+        nodes: nodes,
+        edges: edges,
+    };
+    var options = {};
+    var network = new vis.Network(container, data, options);
+</script>
+
+<div id="mynetwork2"></div>
+
+<script type="text/javascript">
+    // create an array with nodes
+    var nodes2 = new vis.DataSet([
+        { id: 1, label: "ClientService" },
+        { id: 2, label: "UI" },
+        { id: 4, label: "Platform" },
+        { id: 5, label: "FundingService" },
+        { id: 6, label: "CardPayments" },
+        { id: 7, label: "CheckoutSofort" },
+        { id: 8, label: "Gateway" },
+        { id: 9, label: "3ds Bank" },
+    ]);
+
+    // create an array with edges
+    var edges2 = new vis.DataSet([
+        { from: 2, to: 1, label: ":0" },
+        { from: 1, to: 5, label: ":1 initialize" },
+        { from: 5, to: 6, label: ":2 grants" },
+        { from: 5, to: 7, label: ":3 create payment" },
+        { from: 7, to: 8, label: ":4 create payment" },
+        { from: 2, to: 9, label: ":5 authorize" },
+        { from: 8, to: 7, label: ":6 notification " },
+        { from: 7, to: 5, label: ":7 fwd notification " },
+        { from: 4, to: 5, label: ":9 reserve " },
+        { from: 4, to: 5, label: ":11 capture " },
+    ]);
+
+    // create a network
+    var container2 = document.getElementById("mynetwork2");
+    var data2 = {
+        nodes: nodes2,
+        edges: edges2,
+    };
+    var options2 = {};
+    var network2 = new vis.Network(container2, data2, options2);
+
+
+</script>
+
+
+</body>
+</html>
